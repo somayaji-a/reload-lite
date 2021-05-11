@@ -38,7 +38,6 @@ Required Environment Variables
 
 | Variable  | Description |
 | ------------- | ------------- |
-
 | NEXT_PUBLIC_SERVER_URL | URL of the nodejs Server. Will be localhost during dev. |
 | NEXT_PUBLIC_FIREBASE_API_KEY | The Firebase API key, found in the Firebase console |
 | NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN  | Firebase Auth Domain, found in the Firebase console  |
