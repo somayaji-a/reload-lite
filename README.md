@@ -30,7 +30,7 @@ Using an older node version may lead to unexpected errors.
 This Project Requires Firebase credentials and either Postgres or MongoDB credentials. 
 Simply substitute the credentials into the appropriate env variables in both the client and server. 
 
-Obtaining credentials from Firebase can be found in the Saas Starter Kit docs. Postgres and MongoDB credentials are user set. 
+How to obtain the credentials from Firebase can be found in the Saas Starter Kit docs. Postgres and MongoDB credentials are user set. 
 
 Required Environment Variables
 
@@ -38,23 +38,27 @@ Required Environment Variables
 
 | Variable  | Description |
 | ------------- | ------------- |
-| PUID | Set userid that the container will run as. |
-| PGID | Set groupid that the container will run as. |
-| JWT_SECRET  | Keep your passwords and user logins secure with a JWT SECRET  |
-| DB_USERNAME | Enter database username here |
-| DB_PASSWORD | Enter database password here |
-| PORT | Choose a custom port to run the app on rather than the default 5000 |
+
+| NEXT_PUBLIC_SERVER_URL | URL of the nodejs Server. Will be localhost during dev. |
+| NEXT_PUBLIC_FIREBASE_API_KEY | The Firebase API key, found in the Firebase console |
+| NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN  | Firebase Auth Domain, found in the Firebase console  |
+
 
 #### Server:
 
 | Variable  | Description |
 | ------------- | ------------- |
-| PUID | Set userid that the container will run as. |
-| PGID | Set groupid that the container will run as. |
-| JWT_SECRET  | Keep your passwords and user logins secure with a JWT SECRET  |
-| DB_USERNAME | Enter database username here |
-| DB_PASSWORD | Enter database password here |
-| PORT | Choose a custom port to run the app on rather than the default 5000 |
+| FIREBASE_DATABASE_URL | Found in Firebase Service Account Key JSON file. See docs for more info. |
+| FIREBASE_PROJECT_ID | Found in Firebase Service Account Key JSON file. See docs for more info. |
+| FIREBASE_CLIENT_EMAIL | Found in Firebase Service Account Key JSON file. See docs for more info. |
+| FIREBASE_PRIVATE_KEY | Found in Firebase Service Account Key JSON file. See docs for more info. |
+| AUTH_SECRET | User set, can be anything |
+| DB_PASSWORD | Postgres Password, user set |
+| DB_USER | Postgres username |
+| DB_HOST | Postgres host, localhost in dev |
+| DB_NAME | Name of Postgres database |
+| DB_PORT | Postgres Port, default is 5432 |
+| MONGO_URL | MongoDB URL is optional, if already using Postgres. Required if not. |
 <br />
 Once the Environment Variables are defined and node modules installed the boilerplate is ready to go. 
 
