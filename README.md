@@ -102,7 +102,7 @@ Yes, We know having the Pro version behind a paywall is a little annoying, but t
 
 The Pro Version can be found here:
 
-https://saasstarterkit.com
+https://www.saasstarterkit.com
 
 ## 🤝 Contributing
 
