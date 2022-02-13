@@ -1,8 +1,7 @@
 <h1 align="center">ReLoad Docs
 </h1>
 <br />
-<br />
- 
+
 > ReLoad is a micro-SaaS solution designed to help line managers allocate resources. 
 
 ## 🎛 Tech Stack 
