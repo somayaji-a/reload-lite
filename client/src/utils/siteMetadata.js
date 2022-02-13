@@ -1,6 +1,6 @@
 const siteMetadata = {
-  defaultTitle: `Gatsby SAAS Starter`,
-  defaultDescription: `A starter for a minimal SAAS app`,
+  defaultTitle: `ReLoad - Resource Management for Teams`,
+  defaultDescription: `Minimal Resource Management for Teams`,
   siteUrl: `http://localhost:8000`,
   defaultImage: ''
 };

@@ -3,15 +3,22 @@ import styled from 'styled-components';
 import AuthContext from '../../../utils/authContext';
 import ApiContext from '../../../utils/apiContext';
 import getOrgId from '../../../utils/orgId';
-import Todo from './todo';
+import People from './people';
+import Projects from './projects';
 import { Empty, Spin } from 'antd';
 import axios from '../../../services/axios';
 import Card from '../../../components/Common/Card';
 
+const OverallMain = styled.div`
+display: flex;
+flex-direction: row;
+width: 100%;
+`;
+
 const StyledMain = styled.div`
   display: flex;
   flex-direction: column;
-  width: 75%;
+  width: 50%;
 `;
 
 const Title = styled.h1`
@@ -26,109 +33,209 @@ const ReadUpdate = () => {
   let token = authState?.user.jwt_token;
   const headers = { Authorization: `Bearer ${token}` };
 
-  const [todos, setTodos] = useState([]);
+  const [people, setPeople] = useState([]);
+  const [projects, setProject] = useState([]);
 
-  //Edit Todo state and form state
-  const [isEditting, setEdit] = useState(false);
-  const [editTodoID, setTodoID] = useState(null);
+  //Edit People state and form state
+  const [isEdittingPeople, setEditPeople] = useState(false);
+  const [editPeopleID, setPeopleID] = useState(null);
+  const [editName, setEditName] = useState('');
+  const [editDescriptionPeople, setEditDescriptionPeople] = useState('');
+
+  //Edit Project state and form state
+  const [editProjectID, setProjectID] = useState(null);
   const [editTitle, setEditTitle] = useState('');
-  const [editDescription, setEditDescription] = useState('');
+  const [isEdittingProject, setEditProject] = useState(false);
+  const [editDescriptionProject, setEditDescriptionProject] = useState('');
+
 
   /* eslint-disable */
   useEffect(() => {
-    if (org_id) fetchTodos();
+    if (org_id) fetchPeople();
+    if (org_id) fetchProjects();
   }, [org_id]);
   /* eslint-enable */
 
-  const fetchTodos = async () => {
+  const fetchPeople = async () => {
     fetchInit();
 
     let params = { org_id };
 
-    let result = await axios.get(`/api/get/todos`, { params, headers }).catch((err) => {
+    let result = await axios.get(`/api/get/people`, { params, headers }).catch((err) => {
       fetchFailure(err);
     });
-
-    setTodos(result.data);
+    
+    setPeople(result.data);
     fetchSuccess();
   };
 
-  const deleteTodo = async (todo) => {
+  const deletePeople = async (people) => {
     fetchInit();
-    let todo_id = todo.id;
+    let people_id = people.id;
 
-    let params = { todo_id };
-    await axios.delete(`/api/delete/todo`, { params, headers }).catch((err) => {
+    let params = { people_id };
+    await axios.delete(`/api/delete/people`, { params, headers }).catch((err) => {
       fetchFailure(err);
     });
 
-    setEdit(false);
+    setEditPeople(false);
 
-    setTimeout(() => fetchTodos(), 300);
+    setTimeout(() => fetchPeople(), 300);
     fetchSuccess();
   };
 
-  const putTodo = async (event, todo) => {
+  const putPeople = async (event, people) => {
+    event.preventDefault();
+    fetchInit();
+    let name = event.target.name.value;
+    let description = event.target.description.value;
+    let author = authState?.user.username;
+    let people_id = people.id;
+
+    let data = { name, description, author, people_id };
+    await axios.put(`/api/put/people`, data, { headers }).catch((err) => {
+      fetchFailure(err);
+    });
+
+    setEditPeople(false);
+    //Save data to context to limit api calls
+    setTimeout(() => fetchPeople(), 300);
+    fetchSuccess();
+  };
+
+  const editPeople = (people) => {
+    setEditPeople(true);
+    setPeopleID(people.id);
+    setEditName(people.name);
+    setEditDescriptionPeople(people.description);
+  };
+
+  const handleEditNameChange = (event) => {
+    setEditName(event.target.value);
+  };
+
+  const handleEditDescPeopleChange = (event) => {
+    setEditDescriptionPeople(event.target.value);
+  };
+
+  const handleEditDescProjectChange = (event) => {
+    setEditDescriptionProject(event.target.value);
+  };
+
+  const fetchProjects = async () => {
+    fetchInit();
+
+    let params = { org_id };
+
+    let result = await axios.get(`/api/get/projects`, { params, headers }).catch((err) => {
+      fetchFailure(err);
+    });
+
+    setProject(result.data);
+
+    fetchSuccess();
+  };
+
+  const deleteProject = async (projects) => {
+    fetchInit();
+    let project_id = projects.id;
+
+    let params = { project_id };
+    await axios.delete(`/api/delete/projects`, { params, headers }).catch((err) => {
+      fetchFailure(err);
+    });
+
+    setEditProject(false);
+
+    setTimeout(() => fetchProjects(), 300);
+    fetchSuccess();
+  };
+
+  const putProject = async (event, projects) => {
     event.preventDefault();
     fetchInit();
     let title = event.target.title.value;
     let description = event.target.description.value;
-    let author = authState?.user.username;
-    let todo_id = todo.id;
+    let project_id = projects.id;
 
-    let data = { title, description, author, todo_id };
-    await axios.put(`/api/put/todo`, data, { headers }).catch((err) => {
+    let data = { title, description, project_id };
+    await axios.put(`/api/put/projects`, data, { headers }).catch((err) => {
       fetchFailure(err);
     });
 
-    setEdit(false);
+    setEditProject(false);
     //Save data to context to limit api calls
-    setTimeout(() => fetchTodos(), 300);
+    setTimeout(() => fetchProjects(), 300);
     fetchSuccess();
   };
 
-  const editTodo = (todo) => {
-    setEdit(true);
-    setTodoID(todo.id);
-    setEditTitle(todo.title);
-    setEditDescription(todo.description);
+  const editProject = (projects) => {
+    setEditProject(true);
+    setProjectID(projects.id);
+    setEditTitle(projects.title);
+    setEditDescriptionProject(projects.description);
   };
 
   const handleEditTitleChange = (event) => {
     setEditTitle(event.target.value);
   };
 
-  const handleEditDescChange = (event) => {
-    setEditDescription(event.target.value);
-  };
-
   return (
-    <StyledMain>
-      <Title>Team Members: </Title>
-      <Card>
-        <Spin tip="Loading..." spinning={isLoading}>
-          {todos.length !== 0 ? (
-            todos.map((todo) => (
-              <Todo
-                todo={todo}
-                isEditting={isEditting}
-                editTodoID={editTodoID}
-                handleEditTitleChange={handleEditTitleChange}
-                editTitle={editTitle}
-                handleEditDescChange={handleEditDescChange}
-                editDescription={editDescription}
-                editTodo={editTodo}
-                deleteTodo={deleteTodo}
-                putTodo={putTodo}
-                setEdit={setEdit}
-              />
-            ))
-          ) : (
-            <Empty />
-          )}
-        </Spin>
-      </Card>
-    </StyledMain>
+    <OverallMain>
+      <StyledMain>
+        <Title>Team Members: </Title>
+        <Card>
+          <Spin tip="Loading..." spinning={isLoading}>
+            {people.length !== 0 ? (
+              people.map((people) => (
+                <People
+                  people={people}
+                  isEditting={isEdittingPeople}
+                  editPeopleID={editPeopleID}
+                  handleEditNameChange={handleEditNameChange}
+                  editName={editName}
+                  handleEditDescChange={handleEditDescPeopleChange}
+                  editDescription={editDescriptionPeople}
+                  editPeople={editPeople}
+                  deletePeople={deletePeople}
+                  putPeople={putPeople}
+                  setEdit={setEditPeople}
+                />
+              ))
+            ) : (
+              <Empty />
+            )}
+          </Spin>
+        </Card>
+      </StyledMain>
+      <StyledMain>
+        <Title>Projects: </Title>
+        <Card>
+          <Spin tip="Loading..." spinning={isLoading}>
+            {projects.length !== 0 ? (
+              projects.map((projects) => (
+                <Projects
+                  projects={projects}
+                  isEditting={isEdittingProject}
+                  editProjectID={editProjectID}
+                  handleEditTitleChange={handleEditTitleChange}
+                  editTitle={editTitle}
+                  handleEditDescChange={handleEditDescProjectChange}
+                  editDescription={editDescriptionProject}
+                  editProject={editProject}
+                  deleteProject={deleteProject}
+                  putProject={putProject}
+                  setEdit={setEditProject}
+                />
+              ))
+            ) : (
+              <Empty />
+            )}
+          </Spin>
+        </Card>
+      </StyledMain>
+    </OverallMain>
+    
   );
 };
 

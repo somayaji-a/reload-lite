@@ -87,8 +87,8 @@ const Layout = ({ children }) => {
     theme === THEMES.LIGHT ? setTheme(THEMES.DARK) : setTheme(THEMES.LIGHT);
 
   const seoData = {
-    title: 'Saas Starter Kit Pro App',
-    description: 'Saas Starter Kit Pro App'
+    title: 'ReLoad Resource Management Platform',
+    description: 'Resource Management Platform'
   };
 
   return (

@@ -14,7 +14,8 @@ import { errorHandler } from './Middleware/errorHandler.js';
 import { unhandledRejectionHandler } from './Middleware/unhandledRejectionHandler.js';
 
 import auth from './API/auth.js';
-import todoApi from './API/todos.js';
+import peopleApi from './API/people.js';
+import projectsApi from './API/projects.js'
 import utilsApi from './API/utils.js';
 import orgApi from './API/org.js';
 
@@ -32,7 +33,8 @@ app.use('/', utilsApi);
 
 app.use('/auth', auth);
 app.use('/api', orgApi);
-app.use('/api', todoApi);
+app.use('/api', peopleApi);
+app.use('/api', projectsApi);
 
 // error handling
 app.use(errorHandler);

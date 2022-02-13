@@ -22,7 +22,7 @@ const ButtonsWrapper = styled.div`
   padding-bottom: 1rem;
 `;
 
-const TitleWrapper = styled.div`
+const NameWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 1rem;
@@ -39,26 +39,25 @@ const FormButtonsWrapper = styled.div`
   justify-content: space-between;
 `;
 
-const Todo = ({
-  todo,
+const Projects = ({
+  projects,
   isEditting,
-  editTodoID,
+  editProjectID,
   handleEditTitleChange,
   editTitle,
   handleEditDescChange,
   editDescription,
-  editTodo,
-  deleteTodo,
-  putTodo,
+  editProject,
+  deleteProject,
+  putProject,
   setEdit
 }) => (
   <Wrapper>
-    <h4>{todo.title}</h4>
-    <div>{todo.description}</div>
-    <p>By {todo.author}</p>
+    <h4>{projects.title}</h4>
+    <div>{projects.description}</div>
     <ButtonsWrapper>
       <Button
-        onClick={() => editTodo(todo)}
+        onClick={() => editProject(projects)}
         backgroundColor={colors.indigo600}
         textColor={colors.white}
         hoverBackgroundColor={colors.indigo500}
@@ -68,7 +67,7 @@ const Todo = ({
       </Button>
 
       <DangerButton
-        onClick={() => deleteTodo(todo)}
+        onClick={() => deleteProject(projects)}
         backgroundColor={colors.red500}
         textColor={colors.white}
         hoverBackgroundColor={colors.indigo500}
@@ -77,15 +76,15 @@ const Todo = ({
         Delete
       </DangerButton>
     </ButtonsWrapper>
-    {isEditting && todo.id === editTodoID && (
-      <form onSubmit={(event) => putTodo(event, todo)}>
+    {isEditting && projects.id === editProjectID && (
+      <form onSubmit={(event) => putProject(event, projects)}>
         <Card>
-          <TitleWrapper>
+          <NameWrapper>
             <FieldLabel>
               Title
               <TextInput onChange={handleEditTitleChange} value={editTitle} name="title" />
             </FieldLabel>
-          </TitleWrapper>
+          </NameWrapper>
           <DescriptionWrapper>
             <FieldLabel>
               Description
@@ -123,4 +122,4 @@ const Todo = ({
   </Wrapper>
 );
 
-export default Todo;
+export default Projects;

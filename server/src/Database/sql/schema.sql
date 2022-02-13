@@ -13,10 +13,17 @@ CREATE TABLE organizations (
   primary_email VARCHAR(255) REFERENCES users(email) ON UPDATE CASCADE
 );
 
-CREATE TABLE todos (
+CREATE TABLE people (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255),
+  description VARCHAR(1000),
+  author VARCHAR(255),
+  org_id UUID REFERENCES organizations(id)
+);
+
+CREATE TABLE projects (
   id SERIAL PRIMARY KEY,
   title VARCHAR(255),
   description VARCHAR(1000),
-  author VARCHAR(255),
   org_id UUID REFERENCES organizations(id)
 );

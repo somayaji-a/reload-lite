@@ -66,38 +66,44 @@ export const getMenus = (org_id) => [
   },
   {
     id: '3',
-    name: 'Create',
-    route: `/app/${org_id}/create`,
+    name: 'Create People',
+    route: `/app/${org_id}/createpeople`,
     icon: <StyledCreate />
   },
-  {
-    id: '4',
-    name: 'Permissions',
-    route: `/app/${org_id}/permissions`,
-    icon: <StyledPermissions />
-  },
+  // {
+  //   id: '4',
+  //   name: 'Permissions',
+  //   route: `/app/${org_id}/permissions`,
+  //   icon: <StyledPermissions />
+  // },
   {
     id: '5',
-    name: 'Users',
-    route: `/app/${org_id}/users`,
-    icon: <StyledCollab />
+    name: 'Create Project',
+    route: `/app/${org_id}/createproject`,
+    icon: <StyledCreate />
   },
-  {
-    id: '6',
-    name: 'Onboarding',
-    route: `/app/${org_id}/onboarding`,
-    icon: <StyledOnboarding />
-  },
-  {
-    id: '7',
-    name: 'Machine Learning',
-    route: `/app/${org_id}/machinelearning`,
-    icon: <StyledML />
-  },
-  {
-    id: '8',
-    name: 'Settings',
-    route: `/app/${org_id}/settings`,
-    icon: <StyledEng />
-  }
+  // {
+  //   id: '6',
+  //   name: 'Users',
+  //   route: `/app/${org_id}/users`,
+  //   icon: <StyledCollab />
+  // },
+  // {
+  //   id: '7',
+  //   name: 'Onboarding',
+  //   route: `/app/${org_id}/onboarding`,
+  //   icon: <StyledOnboarding />
+  // },
+  // {
+  //   id: '8',
+  //   name: 'Machine Learning',
+  //   route: `/app/${org_id}/machinelearning`,
+  //   icon: <StyledML />
+  // },
+  // {
+  //   id: '9',
+  //   name: 'Settings',
+  //   route: `/app/${org_id}/settings`,
+  //   icon: <StyledEng />
+  // }
 ];

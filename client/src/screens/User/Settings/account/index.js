@@ -10,7 +10,7 @@ import SEO from '../../../../components/Marketing/Layout/seo';
 import LoadingOverlay from '../../../../components/Common/loadingOverlay';
 import styled from 'styled-components';
 
-import SettingsHeader from '../../../../components/User/Navigation/settingsHeader';
+import SettingsHeader from '../../../../components/User//settingsHeader';
 import UpdateUsernameCard from './updateUsernameCard';
 import UpdateEmailCard from './updateEmailCard';
 

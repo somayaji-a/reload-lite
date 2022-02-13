@@ -35,7 +35,7 @@ const ButtonWrapper = styled.div`
 const CreateTask = () => {
   const org_id = getOrgId();
 
-  const [formTitle, setTitle] = useState('');
+  const [formName, setName] = useState('');
   const [formDescription, setDescription] = useState('');
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
@@ -43,27 +43,27 @@ const CreateTask = () => {
   let token = authState?.user.jwt_token;
   const headers = { Authorization: `Bearer ${token}` };
 
-  const postTodo = async (event) => {
+  const postPeople = async (event) => {
     event.preventDefault();
     fetchInit();
 
     let author = authState?.user.username;
-    let title = event.target.title.value;
+    let name = event.target.name.value;
     let description = event.target.description.value;
-    let data = { title, description, author, org_id };
+    let data = { name, description, author, org_id };
 
-    await axios.post(`/api/post/todo`, data, { headers }).catch((err) => {
+    await axios.post(`/api/post/people`, data, { headers }).catch((err) => {
       fetchFailure(err);
     });
 
-    setTitle('');
+    setName('');
     setDescription('');
-    message.success('Todo Created');
+    message.success('Team Member Added');
     fetchSuccess();
   };
 
-  const handleTitleChange = (event) => {
-    setTitle(event.target.value);
+  const handleNameChange = (event) => {
+    setName(event.target.value);
   };
 
   const handleDescChange = (event) => {
@@ -72,14 +72,14 @@ const CreateTask = () => {
 
   return (
     <div>
-      <Title>Create Todo</Title>
-      <form onSubmit={postTodo}>
+      <Title>Add Team Members</Title>
+      <form onSubmit={postPeople}>
         <Card>
           <Spin tip="Loading..." spinning={isLoading}>
             <InputWrapper>
-              <FieldLabel htmlFor="title">
-                Title
-                <TextInput onChange={handleTitleChange} value={formTitle} name="title" />
+              <FieldLabel htmlFor="Name">
+                Name
+                <TextInput onChange={handleNameChange} value={formName} name="name" />
               </FieldLabel>
             </InputWrapper>
             <TextAreaWrapper>

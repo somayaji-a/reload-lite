@@ -26,13 +26,13 @@ export const GetOrgModel = async (email) => {
 };
 
 export const DeleteOrgModel = async (org_id) => {
-  let todosText = `DELETE FROM todos WHERE org_id=$1`;
-  let todosValues = [org_id];
+  let peopleText = `DELETE FROM people WHERE org_id=$1`;
+  let peopleValues = [org_id];
 
   let orgText = `DELETE FROM organizations WHERE id=$1`;
   let orgValues = [org_id];
 
-  await db.query(todosText, todosValues);
+  await db.query(peopleText, peopleValues);
 
   await db.query(orgText, orgValues);
   return;
