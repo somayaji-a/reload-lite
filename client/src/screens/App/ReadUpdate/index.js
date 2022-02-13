@@ -104,7 +104,7 @@ const ReadUpdate = () => {
 
   return (
     <StyledMain>
-      <Title>Todos: </Title>
+      <Title>Team Members: </Title>
       <Card>
         <Spin tip="Loading..." spinning={isLoading}>
           {todos.length !== 0 ? (
