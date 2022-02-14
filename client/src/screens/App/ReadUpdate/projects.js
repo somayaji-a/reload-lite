@@ -11,6 +11,9 @@ import FieldLabel from '../../../components/Common/forms/FieldLabel';
 import TextArea from '../../../components/Common/forms/TextArea';
 import TextInput from '../../../components/Common/forms/TextInput';
 
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
 const Wrapper = styled.div`
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -38,6 +41,7 @@ const FormButtonsWrapper = styled.div`
   display: flex;
   justify-content: space-between;
 `;
+
 
 const Projects = ({
   projects,
@@ -85,6 +89,14 @@ const Projects = ({
             <FieldLabel>
               Title
               <TextInput onChange={handleEditTitleChange} value={editTitle} name="title" />
+            </FieldLabel>
+            <FieldLabel htmlFor="startDate">
+              Start Date:
+              {/* <DatePicker select={startDate} onChange={(date) => setStartDate(date)} name="startDate"/> */}
+            </FieldLabel>
+            <FieldLabel htmlFor="endDate">
+              End Date:
+              {/* <DatePicker selected={endDate} onChange={(date) => setEndDate(date)} name="endDate"/> */}
             </FieldLabel>
           </NameWrapper>
           <DescriptionWrapper>
