@@ -55,6 +55,8 @@ const Projects = ({
   <Wrapper>
     <h4>{projects.title}</h4>
     <div>{projects.description}</div>
+    <div>Start Date: {projects.start_date}</div>
+    <div>End Date: {projects.end_date}</div>
     <ButtonsWrapper>
       <Button
         onClick={() => editProject(projects)}

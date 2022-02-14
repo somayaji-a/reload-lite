@@ -14,12 +14,22 @@ import FieldLabel from '../../../components/Common/forms/FieldLabel';
 import TextArea from '../../../components/Common/forms/TextArea';
 import TextInput from '../../../components/Common/forms/TextInput';
 
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
 const Title = styled.h1`
   font-size: 1.25rem;
 `;
 
 const InputWrapper = styled.div`
   padding: 1.5rem;
+`;
+
+const MultiInputWrapper = styled.div`
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
 `;
 
 const TextAreaWrapper = styled.div`
@@ -43,20 +53,27 @@ const CreateTask = () => {
   let token = authState?.user.jwt_token;
   const headers = { Authorization: `Bearer ${token}` };
 
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
+
   const postProjects = async (event) => {
     event.preventDefault();
     fetchInit();
 
     let title = event.target.title.value;
     let description = event.target.description.value;
-    let data = { title, description, org_id };
-
+    let start_date = event.target.startDate.value;
+    let end_date = event.target.endDate.value;
+    let data = { title, description, org_id, start_date, end_date };
     await axios.post(`/api/post/projects`, data, { headers }).catch((err) => {
       fetchFailure(err);
     });
 
     setTitle('');
     setDescription('');
+    setStartDate('');
+    setEndDate('');
+
     message.success('Project Added');
     fetchSuccess();
   };
@@ -81,6 +98,16 @@ const CreateTask = () => {
                 <TextInput onChange={handleTitleChange} value={formTitle} name="title" />
               </FieldLabel>
             </InputWrapper>
+            <MultiInputWrapper>
+              <FieldLabel htmlFor="startDate">
+                Start Date:
+                <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} name="startDate"/>
+              </FieldLabel>
+              <FieldLabel htmlFor="endDate">
+                End Date:
+                <DatePicker selected={endDate} onChange={(date) => setEndDate(date)} name="endDate"/>
+              </FieldLabel>
+            </MultiInputWrapper>
             <TextAreaWrapper>
               <FieldLabel htmlFor="description">
                 Description

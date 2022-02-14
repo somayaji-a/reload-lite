@@ -1,9 +1,9 @@
 import db from '../../../Database/sql/db.js';
 
-export const postProjectsModel = async (title, description, org_id) => {
-  let text = `INSERT INTO projects(title, description, org_id)
-              VALUES ($1, $2, $3)`;
-  let values = [title, description, org_id];
+export const postProjectsModel = async (title, description, org_id, start_date, end_date) => {
+  let text = `INSERT INTO projects(title, description, org_id, start_date, end_date)
+              VALUES ($1, $2, $3, $4, $5)`;
+  let values = [title, description, org_id, start_date, end_date];
 
   await db.query(text, values);
 
@@ -19,10 +19,10 @@ export const getProjectsModel = async (org_id) => {
   return queryResult.rows;
 };
 
-export const putProjectsModel = async (title, description, project_id) => {
-  let text = `UPDATE projects SET title= $1, description=$2
+export const putProjectsModel = async (title, description, project_id, start_date, end_date) => {
+  let text = `UPDATE projects SET title= $1, description=$2, start_date=$4, end_date=$5
               WHERE id = $3`;
-  let values = [title, description, project_id];
+  let values = [title, description, project_id, start_date, end_date];
 
   await db.query(text, values);
 

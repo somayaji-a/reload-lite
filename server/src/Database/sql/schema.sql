@@ -21,9 +21,12 @@ CREATE TABLE people (
   org_id UUID REFERENCES organizations(id)
 );
 
+DROP TABLE projects;
 CREATE TABLE projects (
   id SERIAL PRIMARY KEY,
   title VARCHAR(255),
   description VARCHAR(1000),
+  start_date DATE,
+  end_date DATE,
   org_id UUID REFERENCES organizations(id)
 );
