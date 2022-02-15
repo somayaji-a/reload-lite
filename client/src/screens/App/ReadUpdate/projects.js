@@ -96,10 +96,10 @@ const Projects = ({
               <TextInput onChange={handleEditTitleChange} value={editTitle} name="title" />
             </FieldLabel>
             <FieldLabel htmlFor="startDate">
-              <DatePicker selected={editStartDate} onChange={handleEditStartDateChange} value={editStartDate} name="startDate"/>
+              Start Date: <DatePicker selected={editStartDate} onChange={handleEditStartDateChange} value={editStartDate} name="startDate"/>
             </FieldLabel>
             <FieldLabel htmlFor="endDate">
-              <DatePicker selected={editEndDate} onChange={handleEditEndDateChange} value={editEndDate} name="endDate"/>
+              End Date: <DatePicker selected={editEndDate} onChange={handleEditEndDateChange} value={editEndDate} name="endDate"/>
             </FieldLabel>
           </NameWrapper>
           <DescriptionWrapper>
