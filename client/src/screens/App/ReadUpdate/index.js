@@ -47,7 +47,8 @@ const ReadUpdate = () => {
   const [editTitle, setEditTitle] = useState('');
   const [isEdittingProject, setEditProject] = useState(false);
   const [editDescriptionProject, setEditDescriptionProject] = useState('');
-
+  const [editStartDate, setEditStartDate] = useState(projects.startDate);
+  const [editEndDate, setEditEndDate] = useState(projects.endDate);
 
   /* eslint-disable */
   useEffect(() => {
@@ -156,9 +157,13 @@ const ReadUpdate = () => {
     fetchInit();
     let title = event.target.title.value;
     let description = event.target.description.value;
+    let startDate = event.target.startDate.value;
+    let endDate = event.target.endDate.value;
     let project_id = projects.id;
-
-    let data = { title, description, project_id };
+    
+    //let data = { title, description, project_id };
+    let data = { title, description, project_id, startDate, endDate};
+    console.log(data);
     await axios.put(`/api/put/projects`, data, { headers }).catch((err) => {
       fetchFailure(err);
     });
@@ -173,11 +178,21 @@ const ReadUpdate = () => {
     setEditProject(true);
     setProjectID(projects.id);
     setEditTitle(projects.title);
+    setEditStartDate(projects.startDate);
+    setEditEndDate(projects.endDate);
     setEditDescriptionProject(projects.description);
   };
 
   const handleEditTitleChange = (event) => {
     setEditTitle(event.target.value);
+  };
+
+  const handleEditStartDateChange = (event) => {
+    setEditStartDate(event);
+  };
+
+  const handleEditEndDateChange = (event) => {
+    setEditEndDate(event);
   };
 
   return (
@@ -220,6 +235,10 @@ const ReadUpdate = () => {
                   editProjectID={editProjectID}
                   handleEditTitleChange={handleEditTitleChange}
                   editTitle={editTitle}
+                  handleEditStartDateChange={handleEditStartDateChange}
+                  editStartDate={editStartDate}
+                  handleEditEndDateChange={handleEditEndDateChange}
+                  editEndDate={editEndDate}
                   handleEditDescChange={handleEditDescProjectChange}
                   editDescription={editDescriptionProject}
                   editProject={editProject}

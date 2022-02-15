@@ -13,6 +13,7 @@ import TextInput from '../../../components/Common/forms/TextInput';
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { Field } from 'rc-field-form';
 
 const Wrapper = styled.div`
   padding-top: 1rem;
@@ -49,6 +50,10 @@ const Projects = ({
   editProjectID,
   handleEditTitleChange,
   editTitle,
+  handleEditStartDateChange,
+  editStartDate,
+  handleEditEndDateChange,
+  editEndDate,
   handleEditDescChange,
   editDescription,
   editProject,
@@ -91,12 +96,10 @@ const Projects = ({
               <TextInput onChange={handleEditTitleChange} value={editTitle} name="title" />
             </FieldLabel>
             <FieldLabel htmlFor="startDate">
-              Start Date:
-              {/* <DatePicker select={startDate} onChange={(date) => setStartDate(date)} name="startDate"/> */}
+              <DatePicker selected={editStartDate} onChange={handleEditStartDateChange} value={editStartDate} name="startDate"/>
             </FieldLabel>
             <FieldLabel htmlFor="endDate">
-              End Date:
-              {/* <DatePicker selected={endDate} onChange={(date) => setEndDate(date)} name="endDate"/> */}
+              <DatePicker selected={editEndDate} onChange={handleEditEndDateChange} value={editEndDate} name="endDate"/>
             </FieldLabel>
           </NameWrapper>
           <DescriptionWrapper>
